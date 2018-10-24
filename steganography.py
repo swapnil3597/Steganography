@@ -2,8 +2,11 @@ import os , sys
 import wave , struct 
 import binascii
 
-file = '/home/no10/Desktop/DCE/ISE/1.wav'
-text = 'abcdef gh1ijklmopqrstuvwxyz'
+file = '1.wav'
+text_file_name = 'text_file.txt'
+text_file = open('text_file.txt', 'r') 
+text = text_file.read()
+text_file.close()
 
 
 ###############HIDE DATA IN AUDIO ###########################################
@@ -109,7 +112,7 @@ for i in range(len(text)):
 	if len(char_bin) < 7:
 		char_bin = (7 - len(char_bin))*'0' + char_bin
 	text_bin += char_bin
-print(text_bin)
+# print(text_bin)
 
 test_len = len(text_bin)
 w = wave.open(file, mode = 'rb')
@@ -117,6 +120,7 @@ params = w.getparams()        # params = (nchannels, sampwidth, framerate, nfram
 print(params)
 bytes_original =  w.readframes(params[3])
 print(len(bytes_original), 'Bytes Original')
+
 frames = stegano_hide(w , bytes_original, text_bin)
 print(len(frames))
 w.close()
