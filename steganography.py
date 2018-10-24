@@ -12,9 +12,9 @@ import os , sys
 import wave , struct 
 import binascii
 
-file = '1.wav'
-text_file_name = 'text_file.txt'
-text_file = open('text_file.txt', 'r') 
+file = 'Data/1.wav'
+text_file_name = 'Data/text_file.txt'
+text_file = open(text_file_name, 'r') 
 text = text_file.read()
 text_file.close()
 
@@ -136,11 +136,11 @@ print(len(bytes_original), 'Bytes Original')
 frames = stegano_hide(w , bytes_original, text_bin)
 print(len(frames), 'In MAIN_CODE')
 w.close()
-w_w = wave.open('2.wav' , mode = 'wb')
+w_w = wave.open('Data/2.wav' , mode = 'wb')
 create_wave(frames , params, w_w)
 
 w_w.close()
-w_r = wave.open('2.wav' , mode = 'rb')
+w_r = wave.open('Data/2.wav' , mode = 'rb')
 print(w_r.getparams())
 extract_info(w_r,frames, test_len)
 
