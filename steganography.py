@@ -15,8 +15,8 @@ def stegano_hide(w , bytes_original, text_bin):
 	(nchannels, sampwidth, framerate, nframes, comptype, compname) = w.getparams()
 	bytes_steg = ''
 	if(nframes%2!=0):
-		bytes_original = bytes_original[0:nframes-1]
-	for i in range(nframes/2):
+		bytes_original = bytes_original[0:len(bytes_original)-1]
+	for i in range(len(bytes_original)/2-1):
 		bite = bytes_original[2*i:2*i+2]
 		msb_bite_bin = bin(ord(bite[1]))
 		if len(msb_bite_bin)<10:
@@ -54,6 +54,7 @@ def stegano_hide(w , bytes_original, text_bin):
 		msb_bite_bin = '0b' + msb_bite_bin
 		msb_bite_bin = chr(int(msb_bite_bin , 2))
 		bytes_steg += lsb_bite_bin+msb_bite_bin
+	print(len(bytes_steg),'In Encoding')
 	return bytes_steg
 
 ##############CREATE AUDIO FILE WITH HIDDEN DATA######################################################
@@ -71,8 +72,8 @@ def extract_info(w_r , frames, test_len):
 	decrypt_text = ''
 	fin_decrypt_text = ''
 	if(test_len%2 != 0):
-		bytes_hidden = bytes_hidden[0:nframes-1]
-	for i in range(nframes/2-1):
+		bytes_hidden = bytes_hidden[0:len(bytes_hidden)-1]
+	for i in range(len(bytes_hidden)/2-1):
 		bite = bytes_hidden[2*i:2*i+2]
 		msb_bite_bin = bin(ord(bite[1]))
 		if len(msb_bite_bin)<10:
@@ -96,7 +97,7 @@ def extract_info(w_r , frames, test_len):
 		text = decrypt_text[7*i : 7*i+7]
 		text = chr(int(text , 2))
 		fin_decrypt_text += text
-	print(fin_decrypt_text)
+	print(fin_decrypt_text[:200])
 	return 
 
 
@@ -120,9 +121,10 @@ params = w.getparams()        # params = (nchannels, sampwidth, framerate, nfram
 print(params)
 bytes_original =  w.readframes(params[3])
 print(len(bytes_original), 'Bytes Original')
+# print(' '.join(format(ord(x),'b')) for x in bytes_original)
 
 frames = stegano_hide(w , bytes_original, text_bin)
-print(len(frames))
+print(len(frames), 'In MAIN_CODE')
 w.close()
 w_w = wave.open('2.wav' , mode = 'wb')
 create_wave(frames , params, w_w)
