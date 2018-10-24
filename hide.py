@@ -32,7 +32,6 @@ for i in range(len(text)):
 	if len(char_bin) < 7:
 		char_bin = (7 - len(char_bin))*'0' + char_bin
 	text_bin += char_bin
-print(text_bin)
 
 text_length = len(text_bin)
 w = wave.open(file, mode = 'rb')
@@ -45,14 +44,3 @@ w.close()
 w_w = wave.open('Data/2.wav' , mode = 'wb')
 steganography.create_wave(frames , params, w_w)
 w_w.close()
-w_w_r = wave.open('Data/2.wav' , mode = 'rb')
-params = w_w_r.getparams()
-
-w_r = wave.open('Data/2.wav' , mode = 'rb')
-print(w_r.getparams())
-recovere_text = steganography.extract_info(w_r, text_length)
-w_r.close()
-
-seeked_file = open('seeked_file.txt' , 'w')
-seeked_file.write(recovere_text)
-seeked_file.close()
