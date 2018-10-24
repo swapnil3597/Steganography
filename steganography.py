@@ -12,11 +12,6 @@ import os , sys
 import wave , struct 
 import binascii
 
-file = 'Data/1.wav'
-text_file_name = 'Data/text_file.txt'
-text_file = open(text_file_name, 'r') 
-text = text_file.read()
-text_file.close()
 
 
 ###############HIDE DATA IN AUDIO ###########################################
@@ -74,13 +69,13 @@ def create_wave(frames , params , w_w):
 
 
 ##############EXTRACT HIDDEN DATA #############################################
-def extract_info(w_r , frames, test_len):
+def extract_info(w_r, text_length):
 	(nchannels, sampwidth, framerate, nframes, comptype, compname) = w_r.getparams()
 	# print(nframes)
 	bytes_hidden = w_r.readframes(nframes)
 	decrypt_text = ''
 	fin_decrypt_text = ''
-	if(test_len%2 != 0):
+	if(text_length%2 != 0):
 		bytes_hidden = bytes_hidden[0:len(bytes_hidden)-1]
 	for i in range(len(bytes_hidden)/2-1):
 		bite = bytes_hidden[2*i:2*i+2]
@@ -102,42 +97,15 @@ def extract_info(w_r , frames, test_len):
 		msb_bite_bin = msb_bite_bin[2:]
 		decrypt_text += lsb_bite_bin[7 - col_number]
 
+		if i == text_length:
+			break
+
+
 	for i in range(len(decrypt_text)/7):
 		text = decrypt_text[7*i : 7*i+7]
 		text = chr(int(text , 2))
 		fin_decrypt_text += text
-	print(fin_decrypt_text)
-	return 
+	return fin_decrypt_text
 
 
 
-########################MAIN_CODE########################################
-# text_bin = ' '.join(format(ord(x), 'b') for x in text) 
-print(text)
-text_bin = ''
-for i in range(len(text)):
-	char = text[i]
-	char_bin = bin(ord(char))
-	char_bin = char_bin[2:]
-	if len(char_bin) < 7:
-		char_bin = (7 - len(char_bin))*'0' + char_bin
-	text_bin += char_bin
-# print(text_bin)
-
-test_len = len(text_bin)
-w = wave.open(file, mode = 'rb')
-params = w.getparams()        # params = (nchannels, sampwidth, framerate, nframes, comptype, compname)
-print(params)
-bytes_original =  w.readframes(params[3])
-
-frames = stegano_hide(w , bytes_original, text_bin)
-w.close()
-w_w = wave.open('Data/2.wav' , mode = 'wb')
-create_wave(frames , params, w_w)
-
-w_w.close()
-w_r = wave.open('Data/2.wav' , mode = 'rb')
-print(w_r.getparams())
-extract_info(w_r,frames, test_len)
-
-w_r.close()
