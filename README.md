@@ -11,7 +11,15 @@ This repository contains the Data Compression and Encryption ISE component-2 on 
 #### Repository Details:
 * **Data folder:** Consists of Audio file and data to be hidden
 * **Documentation_and_Resources:** Consists of Mini-project report and reference Research Paper.
-* **steganography.py**(Main File): Code for Audio Steganography
+* **steganography_functions.py:** Functions for Audio Steganography
 * **RSA_functions.py:** Used for creating secure channel during Key-exchange
+* **Bob_Hide.py:** The encypted message is hidden in Audio file and key is transferred via secured channel
+* **Alice_Seek.py:** The hidden message is seeked and decrypted by Alice
+* **CA.py:** Certificate Authority auhorizes Bob's Public Key
 
 #### Execution Details:
+```
+$ python Bob_Hide.py
+$ python CA.py
+$ python Alice_Seek.py
+```
