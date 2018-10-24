@@ -14,4 +14,4 @@ This repository contains the Data Compression and Encryption ISE component-2 on 
 * **steganography.py**(Main File): Code for Audio Steganography
 * **RSA_functions.py:** Used for creating secure channel during Key-exchange
 
-#### Execution Details
+#### Execution Details:
