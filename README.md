@@ -7,9 +7,9 @@ This repository contains the Data Compression and Encryption ISE component-2 on 
 
 ### Python libraries required
 - PyCrypto 
-'''
+```
 $ pip install pycrypto
-'''
+```
 
 ## Repository Details:
 * **Data folder:** Consists of Audio file and data to be hidden
