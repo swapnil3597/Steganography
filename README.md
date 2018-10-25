@@ -6,7 +6,7 @@ This repository contains the Data Compression and Encryption ISE component-2 on 
 * 2015120035 - Vedanta Pawar
 
 ### System Architecture
-![System Architecture](https://github.com/swapnil3597/Steganography_Batch_B/blob/master/Data/image.png | width = 100)
+![System Architecture](https://github.com/swapnil3597/Steganography_Batch_B/blob/master/Data/image.png)
 
 #### Python libraries required:
 - PyCrypto:  ```$ pip install pycrypto```
