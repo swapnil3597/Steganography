@@ -76,7 +76,7 @@ print ("Bob's encrypted AES Key is: ")
 print (''.join(map(lambda x: str(x), Bob_encrypted_msg)))
 
 # Creating a secure channel for AES key exchange
-print("Hidden data Audio file sent to Alice and Key Exhanged via secue channel")
+print("Hidden data Audio file sent to Alice and Key Exhanged via secure channel")
 pickle_out = open("Data/obj/Bob_key_secure_channel.pickle","wb")
 pickle.dump(Bob_encrypted_msg, pickle_out)
 pickle_out.close()
