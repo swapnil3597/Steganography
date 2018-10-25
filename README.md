@@ -5,7 +5,7 @@ This repository contains the Data Compression and Encryption ISE component-2 on 
 * 2015120033 - Prathamesh Pai
 * 2015120035 - Vedanta Pawar
 
-#### Python libraries required
+#### Python libraries required:
 - PyCrypto:  ```$ pip install pycrypto```
 
 #### Repository Details:
