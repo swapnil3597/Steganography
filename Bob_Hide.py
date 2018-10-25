@@ -28,7 +28,7 @@ print("The Plaintext is: "+text)
 # Initializing Prime Numbers for RSA key generation 
 p = 17
 q = 19
-print ("Generating Bob's public and private keypairs......")
+print ("Generating Bob's public and private keypairs for secure channel using RSA......")
 public, private = generate_keypair(p, q) # Bob's Keys
 print ("Bob's public key is ", public ," and Bob's private key is ", private)
 
@@ -43,10 +43,11 @@ aes_key = 'This is a key123'
 # AES Encryption of text file
 encryption_suite = AES.new(aes_key, AES.MODE_CBC, 'This is an IV456')
 cipher_text = encryption_suite.encrypt(text)
-
-print("cipher_text", cipher_text)
+print("Text Data Encrypted")
+# print("cipher_text", cipher_text)
 
 # Hiding the message
+print("Steganography: Hiding the text data in the Audio File")
 text_bin = ''
 for i in range(len(text)):
 	char = text[i]
@@ -67,6 +68,7 @@ w.close()
 w_w = wave.open('Data/2.wav' , mode = 'wb')
 create_wave(frames , params, w_w)
 w_w.close()
+print("Steganography: Data being hidden successfully in 'Data/2.wav' ")
 
 # Passing AES Key and Text length through a secure channel
 Bob_encrypted_msg = encrypt(private, str((aes_key, len(text))))
@@ -74,6 +76,7 @@ print ("Bob's encrypted AES Key is: ")
 print (''.join(map(lambda x: str(x), Bob_encrypted_msg)))
 
 # Creating a secure channel for AES key exchange
+print("Hidden data Audio file sent to Alice and Key Exhanged via secue channel")
 pickle_out = open("Data/obj/Bob_key_secure_channel.pickle","wb")
 pickle.dump(Bob_encrypted_msg, pickle_out)
 pickle_out.close()
