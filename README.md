@@ -29,6 +29,6 @@ $ python Alice_Seek.py
 
 ## Acknowledgements
 
-Mentor: **Dr. Preetida Jani**
-This assignment is based on the paper, "A New Audio Steganography with Enhanced Security based on
+* Mentor: **Dr. Preetida Jani**
+* This assignment is based on the paper, "A New Audio Steganography with Enhanced Security based on
 Location Selection Scheme" by Shweta Vinayakarao Jadhav and Prof. A.M Rawate. For more details refer this [link](http://ijesc.org/upload/c15c8681fbc2fdde9ea423a359366306.A%20New%20Audio%20Steganography%20with%20Enhanced%20Security%20based%20on%20Location%20Selection%20Scheme.pdf)
